@@ -1,0 +1,11 @@
+#! /bin/sh
+echo -e "Name: \\t\\tPichin Chao"
+echo -e "Hostname: \\t$(hostname -f)"
+echo -en "Host IP: \\t"; /sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | cut -d' ' -f1
+echo -en "Default Gateway:"; route | grep default | awk '{ print $2}'
+echo -en "OS Version: \\t"; head -n 1 /etc/issue
+echo -en "Memory: \\t"; free | grep Mem | awk '{ print $2}'
+echo -en "CPU Speed: \\t"; dmesg | grep -i 'ghz' | awk '{ print $7 }'
+echo -en "Disk Space: \\t"; df -h --total | grep "total" | awk '{print $2}'
+echo
+cat "`<$0`"
